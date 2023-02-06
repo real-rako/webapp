@@ -1,0 +1,71 @@
+doctype html
+html(lang='nl')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title About
+    link(rel='stylesheet' href='css/style.css')
+    body#all
+    .navbar-container
+      header
+        a(href='/')
+          img.logo(src='images/logo.svg' alt='Games')
+        nav
+          a.hambtn(href='#')
+            img#menu.menu(src='images/ham.svg' alt='Mobilemenu')
+          ul#nav.ShowDesk.HideDesk.menull
+            li#exit.exit-btn.HideDesk
+              img(src='images/cancel-button.svg' alt='toggle menu')
+            li
+              a(href='/') Home
+            li
+              a(href='/about') About
+            li.dropdown
+              a#menu2.menu2(href="#") Reviews
+              ul#nav2.nav2.ShowDesk.HideDesk.menull
+                li#exit2.exit2.exit-btn.HideDesk
+                  img(src='images/cancel-button.svg' alt='toggle menu')
+                li 
+                  a(href="reviews/test1") rdr2 
+                li 
+                  a(href="reviews/test2") gta 5
+            li 
+              a(href='/contact') Contact
+            if loggedIn
+              li
+                a(href='/secret') Admin
+              li
+                a(href='/logout') Logout
+            else     
+              li
+                a(href='/login') Login
+    .about-container
+      #container.container
+        img.aboutupperlogo(src='images/world-wide-web.svg' alt='lol logo')
+        h1 About
+        p.subh.subh2 Wij schrijven al jaren de beste game reviews voor u
+    .about-info
+      #container.container
+        ul
+          li
+            img(src='images/time.svg' alt='time')
+            p Wij geven u al sinds 2010 de beste reviews in Gaming
+          li
+            img(src='images/education.svg' alt='education')
+            p Dit doen we al jaren met hoog opgeleide journalisten
+    footer
+      .footer-container.about
+        #container.container
+          a(href='#')
+            img.logo(src='images/logo.svg' alt='logo')
+          p.address
+            | Amstelstraat 32, 1690AB
+            br
+            | NED
+          ul.footer-linkjes
+            li
+              a(href='#') Terms of Service
+            br  
+            li
+              a(href='#') Privacy policy        
+    script(src='../js/main.js')

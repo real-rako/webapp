@@ -1,0 +1,73 @@
+doctype html
+html(lang='nl')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Contact
+    link(rel='stylesheet' href='css/style.css')
+  body#all
+    .navbar-container
+      header
+        a(href='/')
+          img.logo(src='images/logo.svg' alt='Games')
+        nav
+          a.hambtn(href='#')
+            img#menu.menu(src='images/ham.svg' alt='Mobilemenu')
+          ul#nav.ShowDesk.HideDesk.menull
+            li#exit.exit-btn.HideDesk
+              img(src='images/cancel-button.svg' alt='toggle menu')
+            li
+              a(href='/') Home
+            li
+              a(href='/about') About
+            li.dropdown
+              a#menu2.menu2(href="#") Reviews
+              ul#nav2.nav2.ShowDesk.HideDesk.menull
+                li#exit2.exit2.exit-btn.HideDesk
+                  img(src='images/cancel-button.svg' alt='toggle menu')
+                li 
+                  a(href="reviews/test1") rdr2 
+                li 
+                  a(href="reviews/test2") gta 5
+            li 
+              a(href='/contact') Contact
+            if loggedIn
+              li
+                a(href='/secret') Admin
+              li
+                a(href='/logout') Logout
+            else     
+              li
+                a(href='/login') Login
+    #container.container
+      h1 Contact
+      .contact-form
+        form(action="/" enctype = "multipart/form-data")
+          input(class="input-text contactform"  type="text" id="voornaam" name="voornaam" placeholder="Uw voornaam")
+          
+
+
+          input(class="input-text contactform" type="text" id="Email" name="Email " placeholder="Uw Email")
+          
+          
+
+          textarea(class="input-text tekstcontact contactform" name="tekst" style="height: 6em;" placeholder="Schrijf iets")
+          
+          input(class="submitbutton" type="submit" value="versturen" )
+
+  footer
+    .footer-container
+      #container.container
+        a(href='#')
+          img.logo(src='images/logo.svg' alt='logo')
+        p.address
+          | Amstelstraat 32, 1690AB
+          br
+          | NED
+        ul.footer-linkjes
+          li
+            a(href='#') Terms of Service
+          br
+          li
+            a(href='#') Privacy policy        
+    script(src='../js/main.js')

@@ -1,0 +1,79 @@
+doctype html
+html(lang='nl')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Games
+    link(rel='stylesheet' href='css/style.css')
+  body#all
+    .navbar-container
+      header
+        a(href='/')
+          img.logo(src='images/logo.svg' alt='Games')
+        nav
+          a.hambtn(href='#')
+            img#menu.menu(src='images/ham.svg' alt='Mobilemenu')
+          ul#nav.ShowDesk.HideDesk.menull
+            li#exit.exit-btn.HideDesk
+              img(src='images/cancel-button.svg' alt='toggle menu')
+            li
+              a(href='/') Home
+            li
+              a(href='/about') About
+            li.dropdown
+              a#menu2.menu2(href="#") Reviews
+              ul#nav2.nav2.ShowDesk.HideDesk.menull
+                li#exit2.exit2.exit-btn.HideDesk
+                  img(src='images/cancel-button.svg' alt='toggle menu')
+                li 
+                  a(href="reviews/test1") rdr2 
+                li 
+                  a(href="reviews/test2") gta 5
+            li 
+              a(href='/contact') Contact
+            if loggedIn
+              li
+                a(href='/secret') Admin
+              li
+                a(href='/logout') Logout
+            else     
+              li
+                a(href='/login') Login
+    #container.container
+      section
+        img.notupperlogo(src='images/world-wide-web.svg' alt='lol logo')
+        h1 Rako Game Reviews
+        p.subh Lees de beste game reviews op de markt!
+        img.scroll.lolidk(src='images/down.svg' alt='scroll down')
+    .blue-container
+      #container.container
+        ul
+          li
+            img(src='images/console.svg' alt='console')
+            p Dus je bent een console gamer? Je bent zeker niet alleen.
+          li
+            img(src='images/keyboard.svg' alt='keyboard')
+            p Ben je een pc gamer dan behoor je zeker tot de beste.
+          li
+            img(src='images/nintendo-switch.svg' alt='switch')
+            p Dus je bent een switch gamer? dan behoor je tot de slechtse.
+    .doncontainer
+      #container.container
+        h2 Doneer nu om ons te supporten
+        a.cta(href='#') Begin nu
+    footer
+      .footer-container
+        #container.container
+          a(href='#')
+            img.logo(src='images/logo.svg' alt='logo')
+          p.address
+            | Amstelstraat 32, 1690AB
+            br
+            | NED
+          ul.footer-linkjes
+            li
+              a(href='#') Terms of Service
+            br
+            li
+              a(href='#') Privacy policy
+    script(src='./js/main.js')
