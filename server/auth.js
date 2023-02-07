@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     username:{type:String,required:true,unique:true},
     password:{type:String,required:true,unique:true},
     joined: { type: Date, default: Date.now },
-    userType: { type: String}
+    userType: { type: String, default: 'user' }
 
 });
 
