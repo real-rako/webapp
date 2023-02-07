@@ -43,8 +43,13 @@ const authenticateUser = async (username = {} , password = {}) =>{
 		}
 	};
 }
+const getUserType = async (username = {}) => {
+	const user = await getUser(username);
+	if(!user) return;
+	return user.userType;
+}
 
 	
 		
 	
-module.exports = {authenticateUser};
+module.exports = {authenticateUser, getUserType};
