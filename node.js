@@ -62,6 +62,7 @@ app.post('/auth', async (req, res)=> {
 	if(verify) {
 		req.session.loggedIn = true;
 		req.session.userType = await userAuth.getUserType(username);
+		req.session.username = username;
 		res.redirect('/secret');
 	}
 	else{
@@ -71,7 +72,7 @@ app.post('/auth', async (req, res)=> {
 });
 app.get('/secret', function(req, res) {
 	if (req.session.loggedIn && (req.session.userType === 'admin')) {
-		res.render('secret');
+		res.render('secret', {username : req.session.username});
 	}
 	else {
 		res.redirect('/login');
