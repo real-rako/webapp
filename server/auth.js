@@ -27,9 +27,15 @@ const checkDatabaseConnection = () => {
 	return false;
 }
 
-const authenticateUser = async (username = {} , password = {}) =>{
-	if(!checkDatabaseConnection()) return false;
+const getUser = async (username = {}) => {
+	if(!checkDatabaseConnection()) return; 
 	const user = await userModel.findOne({username});
+	if(!user) return;
+	else return user; 
+}
+
+const authenticateUser = async (username = {} , password = {}) =>{
+	const user = await getUser(username); 
 	if(!user) return false
 	else {
 		if(await bcrypt.compare(password, user.password)) {
@@ -37,6 +43,7 @@ const authenticateUser = async (username = {} , password = {}) =>{
 		}
 	};
 }
+
 	
 		
 	
