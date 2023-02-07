@@ -22,9 +22,13 @@ const userSchema = new mongoose.Schema({
 
 const userModel = mongoose.model("user", userSchema);
 
+const checkDatabaseConnection = () => {
+	if(mongoose.connection.readyState === 1) return true; 
+	return false;
+}
 
 const authenticateUser = async (username = {} , password = {}) =>{
-	if(mongoose.connection.readyState != 1) return false;
+	if(!checkDatabaseConnection()) return false;
 	const user = await userModel.findOne({username});
 	if(!user) return false
 	else {
@@ -33,7 +37,7 @@ const authenticateUser = async (username = {} , password = {}) =>{
 		}
 	};
 }
-
+	
 		
 	
 module.exports = {authenticateUser};
