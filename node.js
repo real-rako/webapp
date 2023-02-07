@@ -90,7 +90,7 @@ app.get('/pages/login.html' ,function(req, res) {
 
 app.get('/logout', function(req, res) {
 	if(req.session.loggedIn) {
-		req.session.loggedIn = false;	
+		req.session.destroy();
 		res.redirect('/pages/login.html');
 		res.end();
 	}
