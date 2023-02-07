@@ -1,1 +1,1 @@
-# magisterjs
+# webapp
