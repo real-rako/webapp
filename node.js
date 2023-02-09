@@ -70,6 +70,17 @@ app.post('/auth', async (req, res)=> {
 	}
 
 });
+app.post('/api/addUser', async (req,res)=> {
+    const username = req.body.username;
+    const password = req.body.password;
+    const userType = req.body.userType;
+    
+    if(req.session.loggedIn === true && (req.session.userType === 'admin')) {
+        userAuth.addUser(username,password,userType);
+        res.send('Success');
+    }
+    else res.send('Do not do that!');
+});
 app.get('/secret', function(req, res) {
 	if (req.session.loggedIn && (req.session.userType === 'admin')) {
 		res.render('secret', {username : req.session.username});
