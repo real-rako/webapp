@@ -61,6 +61,8 @@ app.post('/auth', async (req, res)=> {
 	const verify = await userAuth.authenticateUser(username,password);
 	if(verify) {
 		req.session.loggedIn = true;
+		req.session.userType = await userAuth.getUserType(username);
+		req.session.username = username;
 		res.redirect('/secret');
 	}
 	else{
@@ -68,9 +70,20 @@ app.post('/auth', async (req, res)=> {
 	}
 
 });
+app.post('/api/addUser', async (req,res)=> {
+    const username = req.body.username;
+    const password = req.body.password;
+    const userType = req.body.userType;
+    
+    if(req.session.loggedIn === true && (req.session.userType === 'admin')) {
+        userAuth.addUser(username,password,userType);
+        res.send('Success');
+    }
+    else res.send('Do not do that!');
+});
 app.get('/secret', function(req, res) {
-	if (req.session.loggedIn) {
-		res.render('secret');
+	if (req.session.loggedIn && (req.session.userType === 'admin')) {
+		res.render('secret', {username : req.session.username});
 	}
 	else {
 		res.redirect('/login');
@@ -90,7 +103,7 @@ app.get('/pages/login.html' ,function(req, res) {
 
 app.get('/logout', function(req, res) {
 	if(req.session.loggedIn) {
-		req.session.loggedIn = false;	
+		req.session.destroy();
 		res.redirect('/pages/login.html');
 		res.end();
 	}
@@ -101,6 +114,15 @@ app.get('/logout', function(req, res) {
 
 });
 
+app.get('/secret/addUser', function(req,res) {
+    if(req.session.loggedIn && (req.session.userType === 'admin')) {
+      res.render('secret/addUser');
+    }
+    else {
+      res.redirect('/');
+    }
+    res.end();
+});
 const options = {
 	key: fs.readFileSync("keys/key.pem"),
 	cert: fs.readFileSync("keys/cert.pem")
