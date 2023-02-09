@@ -103,6 +103,15 @@ app.get('/logout', function(req, res) {
 
 });
 
+app.get('/secret/addUser', function(req,res) {
+    if(req.session.loggedIn && (req.session.userType === 'admin')) {
+      res.render('secret/addUser');
+    }
+    else {
+      res.redirect('/');
+    }
+    res.end();
+});
 const options = {
 	key: fs.readFileSync("keys/key.pem"),
 	cert: fs.readFileSync("keys/cert.pem")
