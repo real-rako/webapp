@@ -34,12 +34,29 @@ const getUser = async (username = {}) => {
 	else return user; 
 }
 
+const checkExistenceUser = async (username={}) =>{
+    user = await getUser(username);
+    if(user) return true;
+    else return false;
+
+}
+
+const addUser = async (username = {}, password = {}, userType = 'user') => {
+    if(!checkDatabaseConnection()) { console.log(1); return;}
+    if( await checkExistenceUser(username)) { console.log(2); return;}
+    const user = new userModel(); 
+    user.username = username;
+    user.password = bcrypt.hashSync(password, 10);
+    user.userType = userType;
+    await user.save();
+}
+
 const authenticateUser = async (username = {} , password = {}) =>{
 	const user = await getUser(username); 
 	if(!user) return false
 	else {
 		if(await bcrypt.compare(password, user.password)) {
-			return true;
+            return true;
 		}
 	};
 }
@@ -52,4 +69,4 @@ const getUserType = async (username = {}) => {
 	
 		
 	
-module.exports = {authenticateUser, getUserType};
+module.exports = {authenticateUser, addUser, getUserType};
