@@ -34,6 +34,12 @@ const getUser = async (username = {}) => {
 	else return user; 
 }
 
+const getAllUsers = async () => {
+    if(!checkDatabaseConnection()) return;
+    const users = await userModel.aggregate([{ $project: { _id : 0, username : 1} }]);
+    return users;     
+}
+
 const checkExistenceUser = async (username={}) =>{
     user = await getUser(username);
     if(user) return true;
