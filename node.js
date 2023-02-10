@@ -123,6 +123,19 @@ app.get('/secret/addUser', function(req,res) {
     }
     res.end();
 });
+
+app.get('/secret/delUser', function(req,res) {
+    if(req.session.loggedIn && (req.session.userType === 'admin')) {
+      res.render('secret/delUser');
+    }
+    else {
+      res.redirect('/');
+    }
+    res.end();
+});
+
+        
+
 const options = {
 	key: fs.readFileSync("keys/key.pem"),
 	cert: fs.readFileSync("keys/cert.pem")
