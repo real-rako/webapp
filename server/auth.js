@@ -34,6 +34,12 @@ const getUser = async (username = {}) => {
 	else return user; 
 }
 
+const getAllUsers = async () => {
+    if(!checkDatabaseConnection()) return;
+    const users = await userModel.aggregate([{ $project: { _id : 0, username : 1} }]);
+    return users;     
+}
+
 const checkExistenceUser = async (username={}) =>{
     user = await getUser(username);
     if(user) return true;
@@ -49,6 +55,11 @@ const addUser = async (username = {}, password = {}, userType = 'user') => {
     user.password = bcrypt.hashSync(password, 10);
     user.userType = userType;
     await user.save();
+}
+
+const deleteUser = async (givenUsername) => {
+    if(!checkDatabaseConnection()) return;
+    await userModel.deleteOne({ username: givenUsername });
 }
 
 const authenticateUser = async (username = {} , password = {}) =>{
@@ -69,4 +80,4 @@ const getUserType = async (username = {}) => {
 	
 		
 	
-module.exports = {authenticateUser, addUser, getUserType};
+module.exports = {authenticateUser, addUser, deleteUser,  getAllUsers, getUserType};
