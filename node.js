@@ -81,6 +81,17 @@ app.post('/api/addUser', async (req,res)=> {
     }
     else res.send('Do not do that!');
 });
+
+app.post('/api/delUser', (req,res)=> {
+    const username = req.body.username;
+    if(req.session.loggedIn === true && (req.session.userType === 'admin')) {
+        userAuth.deleteUser(username);
+        res.redirect('/secret/delUser');
+
+
+    }
+    res.redirect('/login');
+});
 app.get('/secret', function(req, res) {
 	if (req.session.loggedIn && (req.session.userType === 'admin')) {
 		res.render('secret', {username : req.session.username});
@@ -124,9 +135,11 @@ app.get('/secret/addUser', function(req,res) {
     res.end();
 });
 
-app.get('/secret/delUser', function(req,res) {
+app.get('/secret/delUser', async function(req,res) {
     if(req.session.loggedIn && (req.session.userType === 'admin')) {
-      res.render('secret/delUser');
+      const users2 = await userAuth.getAllUsers();
+      const username = req.session.username;  
+      res.render('secret/delUser', { users: users2, username });
     }
     else {
       res.redirect('/');

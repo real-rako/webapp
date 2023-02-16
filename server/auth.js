@@ -57,6 +57,11 @@ const addUser = async (username = {}, password = {}, userType = 'user') => {
     await user.save();
 }
 
+const deleteUser = async (givenUsername) => {
+    if(!checkDatabaseConnection()) return;
+    await userModel.deleteOne({ username: givenUsername });
+}
+
 const authenticateUser = async (username = {} , password = {}) =>{
 	const user = await getUser(username); 
 	if(!user) return false
@@ -75,4 +80,4 @@ const getUserType = async (username = {}) => {
 	
 		
 	
-module.exports = {authenticateUser, addUser, getUserType};
+module.exports = {authenticateUser, addUser, deleteUser,  getAllUsers, getUserType};
