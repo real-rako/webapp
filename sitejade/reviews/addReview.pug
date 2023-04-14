@@ -1,0 +1,47 @@
+doctype html
+html(lang='nl')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title rdr2 review
+    link(rel='stylesheet' href='/css/style.css')
+    link(rel="stylesheet", href='/css/addreview.css')
+  body#all.all
+    .navbar-container
+      header
+        a(href='/')
+          img.logo(src='/images/logo.svg' alt='Games')
+        nav
+          a.hambtn(href='#')
+            img#menu.menu(src='/images/ham.svg' alt='Mobilemenu')
+          ul#nav.ShowDesk.HideDesk.menull
+            li#exit.exit-btn.HideDesk
+              img(src='/images/cancel-button.svg' alt='toggle menu')
+            li
+              a(href='/') Home
+            li
+              a(href='/about') About
+            li 
+              a(href='/panel') Reviews
+            li 
+              a(href='/contact') Contact
+            if loggedIn
+              if isAdmin 
+                li
+                  a(href='/secret') Admin
+                li
+                  a(href='/logout') Logout
+              else
+                li
+                  a(href='/logout') Logout
+                
+            else     
+              li
+                a(href='/login') Login
+form(action='/api/addreview' method='POST')
+  input(type='text' name='title' placeholder='Titel')
+  input(type='text' name='author' placeholder='Auteur')
+  input(type='text' name='description' placeholder='Beschrijving')
+  input(type='test' name='image' placeholder='link naar afbeelding')
+  button(type='submit') Review toevoegen
+    script(src='/js/main.js')

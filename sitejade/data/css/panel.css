@@ -1,0 +1,38 @@
+.review {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .review img {
+    width: 250px;
+    height: auto;
+    margin-right: 30px;
+  }
+  
+  .review-content {
+    flex: 1;
+  }
+  
+  .review-title {
+    margin-top: 0;
+  }
+  
+  .review-description {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  
+  .review a {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .review a:hover {
+    color: #666;
+  }
+  

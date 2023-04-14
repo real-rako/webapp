@@ -1,6 +1,7 @@
 const https = require('https');
 const fs = require("fs");
 const express = require('express');
+const router = express.Router();
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -26,10 +27,19 @@ app.use(bodyParser.json());
 
 app.use(function(req, res, exit) {
 	app.locals.loggedIn = req.session.loggedIn;
+	if(req.session.userType === 'admin') {
+		app.locals.isAdmin = true;
+	}
+	else {
+		app.locals.isAdmin = false;}
 	res.app.use(express.static(path.join(__dirname, '/sitejade/data')))
 	exit();
 });
 
+app.get('/ditisstom', async function(req,res) {
+	await userAuth.firstTime();
+	res.redirect('/login');
+})
 app.get('/', function(req, res) {
 	res.render("index");
 });
@@ -142,13 +152,39 @@ app.get('/secret/delUser', async function(req,res) {
       res.render('secret/delUser', { users: users2, username });
     }
     else {
-      res.redirect('/');
+      res.redirect('/login');
     }
     res.end();
 });
 
-        
+app.get('/panel', async function(req, res) {
+	const reviews = await userAuth.getAllReviews();
 
+	res.render('reviews/panel', { reviews: reviews})
+})
+
+
+
+app.get('/panel/addReview', async function(req, res) {
+	if(!req.session.loggedIn) res.redirect('/login')
+	res.render('reviews/addReview')
+})
+app.post('/api/addReview', async function(req,res) {
+	// add ingelogd checker en database connectie checker
+	if(!req.session.loggedIn) return; 
+	const { title, author, description, image } = req.body;
+	userAuth.addReview(title, author, description, image );
+	res.sendStatus(200);
+})
+
+app.get('/reviews/:id',  async function(req,res) {
+		const review = await userAuth.getReviewById(req.params.id);
+		if(!review) {
+			res.status(404).send('Review niet gevonden');
+			return;
+		}
+		res.render('reviews/review', { review: review });
+})
 const options = {
 	key: fs.readFileSync("keys/key.pem"),
 	cert: fs.readFileSync("keys/cert.pem")

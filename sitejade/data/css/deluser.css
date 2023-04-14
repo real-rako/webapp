@@ -1,0 +1,22 @@
+.delUserForm button {
+    background-color: rgb(11, 90, 180);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .delUserForm {
+    margin-bottom: 20px;
+  }
+  
+  .delUserFOrm input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

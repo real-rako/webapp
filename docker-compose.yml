@@ -5,12 +5,21 @@ services:
       context: ./
       dockerfile: Dockerfile
     container_name: "webApp"
+    depends_on:
+      - mongo
     ports:
       - "80:8080"
       - "443:443"
+    networks:
+      - my_network
   mongo: 
-    image: mongo:latest
+    image: mongo
     container_name: "userDatabase"
-    ports: 
-      - "27015:27017"
+    ports:
+      - "27017:27017"
+    networks:
+      - my_network
 
+networks:
+  my_network:
+    driver: bridge

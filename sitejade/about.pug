@@ -20,22 +20,20 @@ html(lang='nl')
               a(href='/') Home
             li
               a(href='/about') About
-            li.dropdown
-              a#menu2.menu2(href="#") Reviews
-              ul#nav2.nav2.ShowDesk.HideDesk.menull
-                li#exit2.exit2.exit-btn.HideDesk
-                  img(src='images/cancel-button.svg' alt='toggle menu')
-                li 
-                  a(href="reviews/test1") rdr2 
-                li 
-                  a(href="reviews/test2") gta 5
+            li 
+              a(href='/panel') Reviews
             li 
               a(href='/contact') Contact
             if loggedIn
-              li
-                a(href='/secret') Admin
-              li
-                a(href='/logout') Logout
+              if isAdmin 
+                li
+                  a(href='/secret') Admin
+                li
+                  a(href='/logout') Logout
+              else
+                li
+                  a(href='/logout') Logout
+                
             else     
               li
                 a(href='/login') Login

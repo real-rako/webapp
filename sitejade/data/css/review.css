@@ -1,0 +1,46 @@
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .review {
+    display: flex;
+    margin: 20px 0;
+  }
+  
+  .review img {
+    width: 30%;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+  
+  .review .review-content {
+    width: 70%;
+  }
+  
+  .review .review-content h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+  
+  .review .review-content p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+  .review .review-content a {
+    display: inline-block;
+    padding: 10px;
+    background-color: #0095FF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .review .review-content a:hover {
+    background-color: #0077CC;
+  }
+  
